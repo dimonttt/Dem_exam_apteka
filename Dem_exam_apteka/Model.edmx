@@ -1,0 +1,982 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище chemist_shopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Analyzers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="DataAndTimeDelivery" Type="datetime" />
+          <Property Name="DateAndTimeCompletion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="blood">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="patient" Type="int" />
+          <Property Name="barcode" Type="varchar" MaxLength="50" />
+          <Property Name="date" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="blood_services">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="blood" Type="int" />
+          <Property Name="service" Type="int" />
+          <Property Name="result" Type="varchar" MaxLength="50" />
+          <Property Name="finished" Type="varchar" MaxLength="50" />
+          <Property Name="accepted" Type="varchar" MaxLength="50" />
+          <Property Name="status" Type="varchar" MaxLength="50" />
+          <Property Name="analyzer" Type="varchar" MaxLength="50" />
+          <Property Name="user" Type="int" />
+        </EntityType>
+        <EntityType Name="DoneServices">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Analyzer" Type="int" />
+          <Property Name="User" Type="int" />
+          <Property Name="IDOrderServices" Type="int" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="LastSeans" Type="datetime" />
+          <Property Name="Services" Type="nvarchar" MaxLength="50" />
+          <Property Name="Accounts" Type="nvarchar" MaxLength="50" />
+          <Property Name="Post" Type="int" />
+        </EntityType>
+        <EntityType Name="InsuranceCompanies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="INN" Type="nvarchar" MaxLength="12" />
+          <Property Name="R/S" Type="nchar" MaxLength="10" />
+          <Property Name="BIC" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Laboratory services">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="Cost" Type="int" />
+          <Property Name="PeriodOfExecution" Type="nchar" MaxLength="50" />
+          <Property Name="AverageDeviation" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="DateOfCreation" Type="date" />
+          <Property Name="OrderStatus" Type="nchar" MaxLength="50" />
+          <Property Name="ServiceStatusInTheOrder" Type="nchar" MaxLength="50" />
+          <Property Name="OrderOmpletionTime" Type="nchar" MaxLength="50" />
+          <Property Name="Users" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderServices">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Service" Type="int" />
+          <Property Name="Order" Type="int" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="surname" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="social_sec_number" Type="varchar" MaxLength="50" />
+          <Property Name="ein" Type="varchar" MaxLength="50" />
+          <Property Name="social_type" Type="varchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
+          <Property Name="passport_s" Type="varchar" MaxLength="50" />
+          <Property Name="passport_n" Type="varchar" MaxLength="50" />
+          <Property Name="birthdate_timestamp" Type="varchar" MaxLength="50" />
+          <Property Name="country" Type="varchar" MaxLength="50" />
+          <Property Name="insurance_name" Type="varchar" MaxLength="50" />
+          <Property Name="insurance_address" Type="varchar" MaxLength="50" />
+          <Property Name="insurance_inn" Type="varchar" MaxLength="50" />
+          <Property Name="ipadress" Type="varchar" MaxLength="50" />
+          <Property Name="insurance_p c" Type="varchar" MaxLength="50" />
+          <Property Name="insurance_bik" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="services">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="Service" Type="varchar" MaxLength="50" />
+          <Property Name="Price" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypeOfInsurancePolicy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="login" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="ip" Type="varchar" MaxLength="50" />
+          <Property Name="lastenter" Type="varchar" MaxLength="50" />
+          <Property Name="services" Type="varchar" MaxLength="50" />
+          <Property Name="type" Type="varchar" MaxLength="50" />
+          <Property Name="Position" Type="int" />
+        </EntityType>
+        <Association Name="FK_blood_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="blood" Type="Self.blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blood">
+              <PropertyRef Name="patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blood_services_blood">
+          <End Role="blood" Type="Self.blood" Multiplicity="0..1" />
+          <End Role="blood_services" Type="Self.blood_services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="blood">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blood_services">
+              <PropertyRef Name="blood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blood_services_services">
+          <End Role="services" Type="Self.services" Multiplicity="0..1" />
+          <End Role="blood_services" Type="Self.blood_services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="services">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="blood_services">
+              <PropertyRef Name="service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blood_services_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="blood_services" Type="Self.blood_services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="blood_services">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoneServices_Analyzers">
+          <End Role="Analyzers" Type="Self.Analyzers" Multiplicity="0..1" />
+          <End Role="DoneServices" Type="Self.DoneServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Analyzers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DoneServices">
+              <PropertyRef Name="Analyzer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoneServices_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="DoneServices" Type="Self.DoneServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DoneServices">
+              <PropertyRef Name="User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderServices_DoneServices">
+          <End Role="DoneServices" Type="Self.DoneServices" Multiplicity="0..1" />
+          <End Role="OrderServices" Type="Self.OrderServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoneServices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderServices">
+              <PropertyRef Name="Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderServices_Laboratory services">
+          <End Role="Laboratory services" Type="Self.Laboratory services" Multiplicity="0..1" />
+          <End Role="OrderServices" Type="Self.OrderServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Laboratory services">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="OrderServices">
+              <PropertyRef Name="Service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderServices_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderServices" Type="Self.OrderServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderServices">
+              <PropertyRef Name="Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище chemist_shopModelContainer">
+          <EntitySet Name="Analyzers" EntityType="Self.Analyzers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="blood" EntityType="Self.blood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="blood_services" EntityType="Self.blood_services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoneServices" EntityType="Self.DoneServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InsuranceCompanies" EntityType="Self.InsuranceCompanies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Laboratory services" EntityType="Self.Laboratory services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderServices" EntityType="Self.OrderServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="services" EntityType="Self.services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfInsurancePolicy" EntityType="Self.TypeOfInsurancePolicy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_blood_Patients" Association="Self.FK_blood_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="blood" EntitySet="blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blood_services_blood" Association="Self.FK_blood_services_blood">
+            <End Role="blood" EntitySet="blood" />
+            <End Role="blood_services" EntitySet="blood_services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blood_services_services" Association="Self.FK_blood_services_services">
+            <End Role="services" EntitySet="services" />
+            <End Role="blood_services" EntitySet="blood_services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blood_services_Users" Association="Self.FK_blood_services_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="blood_services" EntitySet="blood_services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoneServices_Analyzers" Association="Self.FK_DoneServices_Analyzers">
+            <End Role="Analyzers" EntitySet="Analyzers" />
+            <End Role="DoneServices" EntitySet="DoneServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoneServices_Users" Association="Self.FK_DoneServices_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="DoneServices" EntitySet="DoneServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Post" Association="Self.FK_Employees_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderServices_DoneServices" Association="Self.FK_OrderServices_DoneServices">
+            <End Role="DoneServices" EntitySet="DoneServices" />
+            <End Role="OrderServices" EntitySet="OrderServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderServices_Laboratory services" Association="Self.FK_OrderServices_Laboratory services">
+            <End Role="Laboratory services" EntitySet="Laboratory services" />
+            <End Role="OrderServices" EntitySet="OrderServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderServices_Order" Association="Self.FK_OrderServices_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderServices" EntitySet="OrderServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Employees" Association="Self.FK_Users_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Patients" Association="Self.FK_Users_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="chemist_shopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Analyzers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DataAndTimeDelivery" Type="DateTime" Precision="3" />
+          <Property Name="DateAndTimeCompletion" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DoneServices" Relationship="Self.FK_DoneServices_Analyzers" FromRole="Analyzers" ToRole="DoneServices" />
+        </EntityType>
+        <EntityType Name="blood">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="patient" Type="Int32" />
+          <Property Name="barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK_blood_Patients" FromRole="blood" ToRole="Patients" />
+          <NavigationProperty Name="blood_services" Relationship="Self.FK_blood_services_blood" FromRole="blood" ToRole="blood_services" />
+        </EntityType>
+        <EntityType Name="blood_services">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="blood" Type="Int32" />
+          <Property Name="service" Type="Int32" />
+          <Property Name="result" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="finished" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="accepted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="analyzer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user" Type="Int32" />
+          <NavigationProperty Name="blood1" Relationship="Self.FK_blood_services_blood" FromRole="blood_services" ToRole="blood" />
+          <NavigationProperty Name="services" Relationship="Self.FK_blood_services_services" FromRole="blood_services" ToRole="services" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_blood_services_Users" FromRole="blood_services" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="DoneServices">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Analyzer" Type="Int32" />
+          <Property Name="User" Type="Int32" />
+          <Property Name="IDOrderServices" Type="Int32" />
+          <NavigationProperty Name="Analyzers" Relationship="Self.FK_DoneServices_Analyzers" FromRole="DoneServices" ToRole="Analyzers" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_DoneServices_Users" FromRole="DoneServices" ToRole="Users" />
+          <NavigationProperty Name="OrderServices" Relationship="Self.FK_OrderServices_DoneServices" FromRole="DoneServices" ToRole="OrderServices" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="LastSeans" Type="DateTime" Precision="3" />
+          <Property Name="Services" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Accounts" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Post" Type="Int32" />
+          <NavigationProperty Name="Post1" Relationship="Self.FK_Employees_Post" FromRole="Employees" ToRole="Post" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Employees" FromRole="Employees" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="InsuranceCompanies">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="INN" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="R_S" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BIC" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Laboratory_services">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Cost" Type="Int32" />
+          <Property Name="PeriodOfExecution" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="AverageDeviation" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="OrderServices" Relationship="Self.FK_OrderServices_Laboratory_services" FromRole="Laboratory_services" ToRole="OrderServices" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DateOfCreation" Type="DateTime" Precision="0" />
+          <Property Name="OrderStatus" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="ServiceStatusInTheOrder" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="OrderOmpletionTime" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Users" Type="Int32" />
+          <NavigationProperty Name="OrderServices" Relationship="Self.FK_OrderServices_Order" FromRole="Order" ToRole="OrderServices" />
+        </EntityType>
+        <EntityType Name="OrderServices">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Service" Type="Int32" />
+          <Property Name="Order" Type="Int32" />
+          <NavigationProperty Name="DoneServices" Relationship="Self.FK_OrderServices_DoneServices" FromRole="OrderServices" ToRole="DoneServices" />
+          <NavigationProperty Name="Laboratory_services" Relationship="Self.FK_OrderServices_Laboratory_services" FromRole="OrderServices" ToRole="Laboratory_services" />
+          <NavigationProperty Name="Order1" Relationship="Self.FK_OrderServices_Order" FromRole="OrderServices" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Patients">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="social_sec_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ein" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="social_type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="passport_s" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="passport_n" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="birthdate_timestamp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="insurance_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="insurance_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="insurance_inn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ipadress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="insurance_p_c" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="insurance_bik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="blood" Relationship="Self.FK_blood_Patients" FromRole="Patients" ToRole="blood" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Patients" FromRole="Patients" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Post" FromRole="Post" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="services">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="Service" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="blood_services" Relationship="Self.FK_blood_services_services" FromRole="services" ToRole="blood_services" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypeOfInsurancePolicy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastenter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="services" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Position" Type="Int32" />
+          <NavigationProperty Name="blood_services" Relationship="Self.FK_blood_services_Users" FromRole="Users" ToRole="blood_services" />
+          <NavigationProperty Name="DoneServices" Relationship="Self.FK_DoneServices_Users" FromRole="Users" ToRole="DoneServices" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Users_Employees" FromRole="Users" ToRole="Employees" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK_Users_Patients" FromRole="Users" ToRole="Patients" />
+        </EntityType>
+        <Association Name="FK_DoneServices_Analyzers">
+          <End Role="Analyzers" Type="Self.Analyzers" Multiplicity="0..1" />
+          <End Role="DoneServices" Type="Self.DoneServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Analyzers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DoneServices">
+              <PropertyRef Name="Analyzer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blood_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="blood" Type="Self.blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blood">
+              <PropertyRef Name="patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blood_services_blood">
+          <End Role="blood" Type="Self.blood" Multiplicity="0..1" />
+          <End Role="blood_services" Type="Self.blood_services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="blood">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="blood_services">
+              <PropertyRef Name="blood" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blood_services_services">
+          <End Role="services" Type="Self.services" Multiplicity="0..1" />
+          <End Role="blood_services" Type="Self.blood_services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="services">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="blood_services">
+              <PropertyRef Name="service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_blood_services_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="blood_services" Type="Self.blood_services" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="blood_services">
+              <PropertyRef Name="user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoneServices_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="DoneServices" Type="Self.DoneServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DoneServices">
+              <PropertyRef Name="User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderServices_DoneServices">
+          <End Role="DoneServices" Type="Self.DoneServices" Multiplicity="0..1" />
+          <End Role="OrderServices" Type="Self.OrderServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoneServices">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderServices">
+              <PropertyRef Name="Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Post" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderServices_Laboratory_services">
+          <End Role="Laboratory_services" Type="Self.Laboratory_services" Multiplicity="0..1" />
+          <End Role="OrderServices" Type="Self.OrderServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Laboratory_services">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="OrderServices">
+              <PropertyRef Name="Service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderServices_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderServices" Type="Self.OrderServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderServices">
+              <PropertyRef Name="Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="Position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="chemist_shopEntities4" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Analyzers" EntityType="Self.Analyzers" />
+          <EntitySet Name="blood" EntityType="Self.blood" />
+          <EntitySet Name="blood_services" EntityType="Self.blood_services" />
+          <EntitySet Name="DoneServices" EntityType="Self.DoneServices" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="InsuranceCompanies" EntityType="Self.InsuranceCompanies" />
+          <EntitySet Name="Laboratory_services" EntityType="Self.Laboratory_services" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="OrderServices" EntityType="Self.OrderServices" />
+          <EntitySet Name="Patients" EntityType="Self.Patients" />
+          <EntitySet Name="Post" EntityType="Self.Post" />
+          <EntitySet Name="services" EntityType="Self.services" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TypeOfInsurancePolicy" EntityType="Self.TypeOfInsurancePolicy" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK_DoneServices_Analyzers" Association="Self.FK_DoneServices_Analyzers">
+            <End Role="Analyzers" EntitySet="Analyzers" />
+            <End Role="DoneServices" EntitySet="DoneServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blood_Patients" Association="Self.FK_blood_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="blood" EntitySet="blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blood_services_blood" Association="Self.FK_blood_services_blood">
+            <End Role="blood" EntitySet="blood" />
+            <End Role="blood_services" EntitySet="blood_services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blood_services_services" Association="Self.FK_blood_services_services">
+            <End Role="services" EntitySet="services" />
+            <End Role="blood_services" EntitySet="blood_services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_blood_services_Users" Association="Self.FK_blood_services_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="blood_services" EntitySet="blood_services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoneServices_Users" Association="Self.FK_DoneServices_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="DoneServices" EntitySet="DoneServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderServices_DoneServices" Association="Self.FK_OrderServices_DoneServices">
+            <End Role="DoneServices" EntitySet="DoneServices" />
+            <End Role="OrderServices" EntitySet="OrderServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Post" Association="Self.FK_Employees_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Employees" Association="Self.FK_Users_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderServices_Laboratory_services" Association="Self.FK_OrderServices_Laboratory_services">
+            <End Role="Laboratory_services" EntitySet="Laboratory_services" />
+            <End Role="OrderServices" EntitySet="OrderServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderServices_Order" Association="Self.FK_OrderServices_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderServices" EntitySet="OrderServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Patients" Association="Self.FK_Users_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище chemist_shopModelContainer" CdmEntityContainer="chemist_shopEntities4">
+          <EntitySetMapping Name="Analyzers">
+            <EntityTypeMapping TypeName="chemist_shopModel.Analyzers">
+              <MappingFragment StoreEntitySet="Analyzers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DataAndTimeDelivery" ColumnName="DataAndTimeDelivery" />
+                <ScalarProperty Name="DateAndTimeCompletion" ColumnName="DateAndTimeCompletion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="blood">
+            <EntityTypeMapping TypeName="chemist_shopModel.blood">
+              <MappingFragment StoreEntitySet="blood">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="patient" ColumnName="patient" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="blood_services">
+            <EntityTypeMapping TypeName="chemist_shopModel.blood_services">
+              <MappingFragment StoreEntitySet="blood_services">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="blood" ColumnName="blood" />
+                <ScalarProperty Name="service" ColumnName="service" />
+                <ScalarProperty Name="result" ColumnName="result" />
+                <ScalarProperty Name="finished" ColumnName="finished" />
+                <ScalarProperty Name="accepted" ColumnName="accepted" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="analyzer" ColumnName="analyzer" />
+                <ScalarProperty Name="user" ColumnName="user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoneServices">
+            <EntityTypeMapping TypeName="chemist_shopModel.DoneServices">
+              <MappingFragment StoreEntitySet="DoneServices">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Analyzer" ColumnName="Analyzer" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="IDOrderServices" ColumnName="IDOrderServices" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="chemist_shopModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LastSeans" ColumnName="LastSeans" />
+                <ScalarProperty Name="Services" ColumnName="Services" />
+                <ScalarProperty Name="Accounts" ColumnName="Accounts" />
+                <ScalarProperty Name="Post" ColumnName="Post" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InsuranceCompanies">
+            <EntityTypeMapping TypeName="chemist_shopModel.InsuranceCompanies">
+              <MappingFragment StoreEntitySet="InsuranceCompanies">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="R_S" ColumnName="R/S" />
+                <ScalarProperty Name="BIC" ColumnName="BIC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Laboratory_services">
+            <EntityTypeMapping TypeName="chemist_shopModel.Laboratory_services">
+              <MappingFragment StoreEntitySet="Laboratory services">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="PeriodOfExecution" ColumnName="PeriodOfExecution" />
+                <ScalarProperty Name="AverageDeviation" ColumnName="AverageDeviation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="chemist_shopModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DateOfCreation" ColumnName="DateOfCreation" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="ServiceStatusInTheOrder" ColumnName="ServiceStatusInTheOrder" />
+                <ScalarProperty Name="OrderOmpletionTime" ColumnName="OrderOmpletionTime" />
+                <ScalarProperty Name="Users" ColumnName="Users" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderServices">
+            <EntityTypeMapping TypeName="chemist_shopModel.OrderServices">
+              <MappingFragment StoreEntitySet="OrderServices">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="chemist_shopModel.Patients">
+              <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="social_sec_number" ColumnName="social_sec_number" />
+                <ScalarProperty Name="ein" ColumnName="ein" />
+                <ScalarProperty Name="social_type" ColumnName="social_type" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="passport_s" ColumnName="passport_s" />
+                <ScalarProperty Name="passport_n" ColumnName="passport_n" />
+                <ScalarProperty Name="birthdate_timestamp" ColumnName="birthdate_timestamp" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="insurance_name" ColumnName="insurance_name" />
+                <ScalarProperty Name="insurance_address" ColumnName="insurance_address" />
+                <ScalarProperty Name="insurance_inn" ColumnName="insurance_inn" />
+                <ScalarProperty Name="ipadress" ColumnName="ipadress" />
+                <ScalarProperty Name="insurance_p_c" ColumnName="insurance_p c" />
+                <ScalarProperty Name="insurance_bik" ColumnName="insurance_bik" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Post">
+            <EntityTypeMapping TypeName="chemist_shopModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="services">
+            <EntityTypeMapping TypeName="chemist_shopModel.services">
+              <MappingFragment StoreEntitySet="services">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="chemist_shopModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfInsurancePolicy">
+            <EntityTypeMapping TypeName="chemist_shopModel.TypeOfInsurancePolicy">
+              <MappingFragment StoreEntitySet="TypeOfInsurancePolicy">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="chemist_shopModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="lastenter" ColumnName="lastenter" />
+                <ScalarProperty Name="services" ColumnName="services" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

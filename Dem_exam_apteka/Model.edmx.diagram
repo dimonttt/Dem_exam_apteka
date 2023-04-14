@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6f4d9c3fd02a47b9a43bc2d43b50fc03" Name="Diagram1">
+        <EntityTypeShape EntityType="chemist_shopModel.Analyzers" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="chemist_shopModel.blood" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="chemist_shopModel.blood_services" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="chemist_shopModel.DoneServices" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="chemist_shopModel.Employees" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="chemist_shopModel.InsuranceCompanies" Width="1.5" PointX="7.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="chemist_shopModel.Laboratory_services" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="chemist_shopModel.Order" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="chemist_shopModel.OrderServices" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="chemist_shopModel.Patients" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="chemist_shopModel.Post" Width="1.5" PointX="1.5" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="chemist_shopModel.services" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="chemist_shopModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="chemist_shopModel.TypeOfInsurancePolicy" Width="1.5" PointX="9.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="chemist_shopModel.Users" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="chemist_shopModel.FK_DoneServices_Analyzers" ManuallyRouted="false" />
+        <AssociationConnector Association="chemist_shopModel.FK_blood_Patients" ManuallyRouted="false" />
+        <AssociationConnector Association="chemist_shopModel.FK_blood_services_blood" ManuallyRouted="false" />
+        <AssociationConnector Association="chemist_shopModel.FK_blood_services_services" ManuallyRouted="false" />
+        <AssociationConnector Association="chemist_shopModel.FK_blood_services_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="chemist_shopModel.FK_DoneServices_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="chemist_shopModel.FK_OrderServices_DoneServices" ManuallyRouted="false" />
+        <AssociationConnector Association="chemist_shopModel.FK_Employees_Post" ManuallyRouted="false" />
+        <AssociationConnector Association="chemist_shopModel.FK_Users_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="chemist_shopModel.FK_OrderServices_Laboratory_services" ManuallyRouted="false" />
+        <AssociationConnector Association="chemist_shopModel.FK_OrderServices_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="chemist_shopModel.FK_Users_Patients" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
