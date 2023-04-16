@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Mysqlx.Expect.Open.Types.Condition.Types;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Drawing.Imaging;
 
 namespace Dem_exam_apteka
 {
@@ -18,74 +19,96 @@ namespace Dem_exam_apteka
     public struct Blood
     {
         public int id;
-       
 
     }
     public partial class PriemBiomateriala : Form
     {
+        public string name;
+        public string usluga;
+        public string id_prob;
+        public string dr;
+        public string polis;
+
         Random rnd = new Random();
-        public int k = 0; 
+        public int k = 0;
         public static Blood bloods = new Blood();
         public PriemBiomateriala()
         {
             InitializeComponent();
 
+            
             ShowPatients();
             ShowServices();
 
-            int count = 0;
-            
-            foreach (blood bloodss in Program.wftDb.blood)
-            {
-                count = (bloodss.id)++;
-                
-            }
-            //pictureBox1.Text = Convert.ToString(count);
-            textBoxCode.Text = Convert.ToString(count);
+            IDBlood();
         }
-        
+        private void IDBlood()
+        {
+            int count = 0;
+            foreach (blood blood in Program.wftDb.blood)
+            {
+                count = (blood.id_blood)++;
+
+            }
+            
+            textBoxCode.Text = Convert.ToString(count);
+            id_prob = textBoxCode.Text;
+        }
         private void ShowPatients()
         {
             comboBoxFIO.Items.Clear();
-            foreach (Patients patients in Program.wftDb.Patients)
+
+            foreach (patient_new patients in Program.wftDb.patient_new)
             {
-                foreach(Users user in Program.wftDb.Users)
-                {
-                    if(patients.id == user.ID)
-                    {
-                        string[] item = { user.ID.ToString() + ".", user.name };
-                        comboBoxFIO.Items.Add(string.Join(",", item));
-                    }
-                }
+                string[] item = { patients.ID_patients_new.ToString() + " ", patients.name + " ", patients.surname };
+                comboBoxFIO.Items.Add(string.Join(" ", item));
+                name = patients.name;
+                dr = patients.birthdate_timestamp;
+                //polis = patients.insurance_p_c;
             }
         }
 
         private void ShowServices()
         {
             comboBoxUsluga.Items.Clear();
-            foreach(services services in Program.wftDb.services)
+            foreach (services services in Program.wftDb.services)
             {
-                string[] item = { services.Code.ToString() + ".", services.Service };
-                comboBoxUsluga.Items.Add(string.Join(",", item));
+                string[] item = { services.Code.ToString() + " ", services.Service };
+                comboBoxUsluga.Items.Add(string.Join(" ", item));
+                usluga = services.Service;
             }
         }
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             Laborant laborant = new Laborant();
-            laborant.Show();this.Hide();
+            laborant.Show(); this.Hide();
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            
-            for (int i = 0; i < 15; i++)
+            pictureCode.Visible = true;
+            label3.Visible = false;
+            label3.Text = "";
+
+            for (int i = 0; i < 10; i++)
             {
                 k = rnd.Next(0, 10);
-                label4.Text += k + " ";
-            
+                //label3.Text += k + " ";
+                label3.Text += k;
+
             }
-            pictureBox2.Visible = true;
-            label4.Visible = true;
+            label3.Text = Convert.ToString(label3.Text);
+
+            pictureCode.Image = BarCode.DrawEAN13(label3.Text);
+
+
+        }
+        private void ShtrihBarCode()
+        {
+            BarcodeLib.Barcode barcode2 = new BarcodeLib.Barcode(label3.Text, BarcodeLib.TYPE.EAN13);
+            Color backColor = Color.Transparent;
+            Image img = barcode2.Encode(BarcodeLib.TYPE.EAN13, label3.Text, Color.Black, Color.White, (int)(pictureCode.Width * 0.8), (int)(pictureCode.Height * 0.8));
+            pictureCode.Image = img;
         }
         private void Form1_Load(object sender, System.EventArgs e)
         {
@@ -96,49 +119,34 @@ namespace Dem_exam_apteka
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            
-            
-            
-        }
 
+
+
+        }
+        
         private void button1_Click(object sender, EventArgs e)
         {
-            label4.Visible = true;
+            label3.Visible = true;
             pictureCode.Visible = true;
             textBoxCode.Visible = true;
 
-            label4.Text = textBoxCode.Text + DateTime.Today.ToString("dd MM yyyy") + "";
-            for(int i = 0; i < 6; i++)
-            {
-                k = rnd.Next(0, 10);
-                label4.Text += " " + k;
-                    
-            }
+            string a = DateTime.Now.ToString("ddMMyyyy");
+            var rnd = new Random();
+            var Y = new int[4];
+            for (int i = 0; i < Y.Length; i++)
+                Y[i] = rnd.Next(0, 9);
+            string s = string.Join(string.Empty, Y);
 
-            
-            string barcode = textBoxCode.Text;
+            int e1;
+            e1 = Convert.ToInt32(textBoxCode.Text);
+            label3.Text = Convert.ToString(e1 + a + s);
 
-            Bitmap bitm = new Bitmap(barcode.Length * 45, 160);
-            using (Graphics graphic = Graphics.FromImage(bitm))
-            {
+            BarcodeLib.Barcode barcode1 = new BarcodeLib.Barcode(label3.Text, BarcodeLib.TYPE.EAN13);
+            Color backColor = Color.Transparent;
+            Image img = barcode1.Encode(BarcodeLib.TYPE.EAN13, label3.Text, Color.Black, Color.White, (int)(pictureCode.Width * 0.8), (int)(pictureCode.Height * 0.8));
+            pictureCode.Image = img;
 
-                Font newfont = new Font("IDAutomationHC39M", 20);
-                PointF point = new PointF(2f, 2f);
-                SolidBrush black = new SolidBrush(Color.Black);
-                SolidBrush white = new SolidBrush(Color.White);
-                graphic.FillRectangle(white, 0, 0, bitm.Width, bitm.Height);
-                graphic.DrawString("*" + barcode + "*", newfont, black, point);
-
-
-            }
-
-            using (MemoryStream Mmst = new MemoryStream())
-            {
-
-
-                bitm.Save("ms", ImageFormat.Jpeg);
-               
-            }
+         
         }
 
         private void pictureCode_Click(object sender, EventArgs e)
@@ -155,15 +163,38 @@ namespace Dem_exam_apteka
         private void button3_Click(object sender, EventArgs e)
         {
             AddPatient addPatient = new AddPatient();
-            addPatient.Show();this.Hide();
+            addPatient.Show(); this.Hide();
         }
 
-        /*private void button2_Click(object sender, EventArgs e)
+        private void buttonSformirovatOrder_Click(object sender, EventArgs e)
         {
-            //pictureBox1.Image = BarCode.DrawEAN13(label4.Text);
-        }*/
+            if (textBoxCode.Text != " " && comboBoxFIO.Text != " " & comboBoxUsluga.Text != " ")
+            {
+                OrderCreate orderCreate = new OrderCreate();
+                orderCreate.Show(); this.Hide();   
+            }
+            else
+            {
+                MessageBox.Show("Заполните все поля","Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (pictureCode.Image == null)
+                return;
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = "PNG|*.png"})
+            {
+                if(saveFileDialog.ShowDialog() == DialogResult.OK) 
+                    pictureCode.Image.Save(saveFileDialog.FileName);
+            }
+
+        }
     }
 
+    /// <summary>
+    /// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /// </summary>
     internal static class BarCode
     {
         const float TOTAL_WIDTH = 1.2343f;//31,35 мм
@@ -289,12 +320,12 @@ namespace Dem_exam_apteka
             //return barCodeBmp;
         }
 
-        /*static internal void SaveBarCodeToFile(string path, string barCodeNum)
+        static internal void SaveBarCodeToFile(string path, string barCodeNum)
         {
             Bitmap bmp = DrawEAN13(barCodeNum);
             bmp.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
             bmp.Dispose();
-        }*/
+        }
 
         static internal bool CheckControlNumber(string barCodeNum)
         {
@@ -319,3 +350,5 @@ namespace Dem_exam_apteka
 
     }
 }
+    
+    

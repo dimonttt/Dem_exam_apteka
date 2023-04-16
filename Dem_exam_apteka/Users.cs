@@ -17,8 +17,8 @@ namespace Dem_exam_apteka
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Users()
         {
-            this.blood_services = new HashSet<blood_services>();
             this.DoneServices = new HashSet<DoneServices>();
+            this.Employees = new HashSet<Employees>();
         }
     
         public int ID { get; set; }
@@ -29,13 +29,10 @@ namespace Dem_exam_apteka
         public string lastenter { get; set; }
         public string services { get; set; }
         public string type { get; set; }
-        public Nullable<int> Position { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<blood_services> blood_services { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DoneServices> DoneServices { get; set; }
-        public virtual Employees Employees { get; set; }
-        public virtual Patients Patients { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Employees> Employees { get; set; }
     }
 }

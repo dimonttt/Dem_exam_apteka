@@ -30,6 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labelDvoetoch2 = new System.Windows.Forms.Label();
+            this.labelDvoetoch = new System.Windows.Forms.Label();
+            this.labelMin = new System.Windows.Forms.Label();
+            this.labelHour = new System.Windows.Forms.Label();
+            this.labelSec = new System.Windows.Forms.Label();
             this.buttonVisible = new System.Windows.Forms.Button();
             this.buttonNotVisible = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -47,11 +52,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.labelDvoetoch2 = new System.Windows.Forms.Label();
-            this.labelDvoetoch = new System.Windows.Forms.Label();
-            this.labelMin = new System.Windows.Forms.Label();
-            this.labelHour = new System.Windows.Forms.Label();
-            this.labelSec = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -86,6 +86,61 @@
             this.panel1.TabIndex = 0;
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            // 
+            // labelDvoetoch2
+            // 
+            this.labelDvoetoch2.AutoSize = true;
+            this.labelDvoetoch2.Font = new System.Drawing.Font("Comic Sans MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelDvoetoch2.Location = new System.Drawing.Point(472, 116);
+            this.labelDvoetoch2.Name = "labelDvoetoch2";
+            this.labelDvoetoch2.Size = new System.Drawing.Size(25, 39);
+            this.labelDvoetoch2.TabIndex = 24;
+            this.labelDvoetoch2.Text = ":";
+            this.labelDvoetoch2.Visible = false;
+            // 
+            // labelDvoetoch
+            // 
+            this.labelDvoetoch.AutoSize = true;
+            this.labelDvoetoch.Font = new System.Drawing.Font("Comic Sans MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelDvoetoch.Location = new System.Drawing.Point(401, 116);
+            this.labelDvoetoch.Name = "labelDvoetoch";
+            this.labelDvoetoch.Size = new System.Drawing.Size(25, 39);
+            this.labelDvoetoch.TabIndex = 23;
+            this.labelDvoetoch.Text = ":";
+            this.labelDvoetoch.Visible = false;
+            // 
+            // labelMin
+            // 
+            this.labelMin.AutoSize = true;
+            this.labelMin.Font = new System.Drawing.Font("Comic Sans MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelMin.Location = new System.Drawing.Point(432, 116);
+            this.labelMin.Name = "labelMin";
+            this.labelMin.Size = new System.Drawing.Size(51, 39);
+            this.labelMin.TabIndex = 22;
+            this.labelMin.Text = "00";
+            this.labelMin.Visible = false;
+            // 
+            // labelHour
+            // 
+            this.labelHour.AutoSize = true;
+            this.labelHour.Font = new System.Drawing.Font("Comic Sans MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelHour.Location = new System.Drawing.Point(359, 116);
+            this.labelHour.Name = "labelHour";
+            this.labelHour.Size = new System.Drawing.Size(51, 39);
+            this.labelHour.TabIndex = 21;
+            this.labelHour.Text = "00";
+            this.labelHour.Visible = false;
+            // 
+            // labelSec
+            // 
+            this.labelSec.AutoSize = true;
+            this.labelSec.Font = new System.Drawing.Font("Comic Sans MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelSec.Location = new System.Drawing.Point(503, 116);
+            this.labelSec.Name = "labelSec";
+            this.labelSec.Size = new System.Drawing.Size(51, 39);
+            this.labelSec.TabIndex = 20;
+            this.labelSec.Text = "00";
+            this.labelSec.Visible = false;
             // 
             // buttonVisible
             // 
@@ -268,56 +323,6 @@
             // 
             this.timer2.Interval = 1000;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
-            // 
-            // labelDvoetoch2
-            // 
-            this.labelDvoetoch2.AutoSize = true;
-            this.labelDvoetoch2.Font = new System.Drawing.Font("Comic Sans MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDvoetoch2.Location = new System.Drawing.Point(472, 116);
-            this.labelDvoetoch2.Name = "labelDvoetoch2";
-            this.labelDvoetoch2.Size = new System.Drawing.Size(25, 39);
-            this.labelDvoetoch2.TabIndex = 24;
-            this.labelDvoetoch2.Text = ":";
-            // 
-            // labelDvoetoch
-            // 
-            this.labelDvoetoch.AutoSize = true;
-            this.labelDvoetoch.Font = new System.Drawing.Font("Comic Sans MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelDvoetoch.Location = new System.Drawing.Point(401, 116);
-            this.labelDvoetoch.Name = "labelDvoetoch";
-            this.labelDvoetoch.Size = new System.Drawing.Size(25, 39);
-            this.labelDvoetoch.TabIndex = 23;
-            this.labelDvoetoch.Text = ":";
-            // 
-            // labelMin
-            // 
-            this.labelMin.AutoSize = true;
-            this.labelMin.Font = new System.Drawing.Font("Comic Sans MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelMin.Location = new System.Drawing.Point(432, 116);
-            this.labelMin.Name = "labelMin";
-            this.labelMin.Size = new System.Drawing.Size(51, 39);
-            this.labelMin.TabIndex = 22;
-            this.labelMin.Text = "00";
-            // 
-            // labelHour
-            // 
-            this.labelHour.AutoSize = true;
-            this.labelHour.Font = new System.Drawing.Font("Comic Sans MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelHour.Location = new System.Drawing.Point(359, 116);
-            this.labelHour.Name = "labelHour";
-            this.labelHour.Size = new System.Drawing.Size(51, 39);
-            this.labelHour.TabIndex = 21;
-            this.labelHour.Text = "00";
-            // 
-            // labelSec
-            // 
-            this.labelSec.AutoSize = true;
-            this.labelSec.Font = new System.Drawing.Font("Comic Sans MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSec.Location = new System.Drawing.Point(503, 116);
-            this.labelSec.Name = "labelSec";
-            this.labelSec.Size = new System.Drawing.Size(51, 39);
-            this.labelSec.TabIndex = 20;
-            this.labelSec.Text = "00";
             // 
             // LoginForm
             // 

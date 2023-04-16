@@ -21,11 +21,9 @@ namespace Dem_exam_apteka
         }
     
         public int ID { get; set; }
-        public Nullable<System.DateTime> DateOfCreation { get; set; }
-        public string OrderStatus { get; set; }
-        public string ServiceStatusInTheOrder { get; set; }
-        public string OrderOmpletionTime { get; set; }
-        public Nullable<int> Users { get; set; }
+        public string patient { get; set; }
+        public string services { get; set; }
+        public string cost { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderServices> OrderServices { get; set; }

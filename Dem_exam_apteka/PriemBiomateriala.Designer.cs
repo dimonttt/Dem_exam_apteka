@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PriemBiomateriala));
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBoxUsluga = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.buttonSformirovatOrder = new System.Windows.Forms.Button();
             this.labelUsluga = new System.Windows.Forms.Label();
             this.labelFIO = new System.Windows.Forms.Label();
@@ -46,6 +44,8 @@
             this.buttonLogin = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureCode)).BeginInit();
             this.panel2.SuspendLayout();
@@ -55,9 +55,10 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.comboBoxUsluga);
             this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.buttonSformirovatOrder);
             this.panel1.Controls.Add(this.labelUsluga);
             this.panel1.Controls.Add(this.labelFIO);
@@ -96,17 +97,6 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Comic Sans MS", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(885, 302);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(61, 24);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "label4";
-            this.label4.Visible = false;
-            // 
             // buttonSformirovatOrder
             // 
             this.buttonSformirovatOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -117,6 +107,7 @@
             this.buttonSformirovatOrder.TabIndex = 12;
             this.buttonSformirovatOrder.Text = "Сформировать заказ";
             this.buttonSformirovatOrder.UseVisualStyleBackColor = true;
+            this.buttonSformirovatOrder.Click += new System.EventHandler(this.buttonSformirovatOrder_Click);
             // 
             // labelUsluga
             // 
@@ -175,7 +166,7 @@
             this.buttonOk.Font = new System.Drawing.Font("Comic Sans MS", 11.2F);
             this.buttonOk.Location = new System.Drawing.Point(364, 184);
             this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(424, 39);
+            this.buttonOk.Size = new System.Drawing.Size(241, 39);
             this.buttonOk.TabIndex = 4;
             this.buttonOk.Text = "Считать сканером";
             this.buttonOk.UseVisualStyleBackColor = true;
@@ -183,10 +174,9 @@
             // 
             // pictureCode
             // 
-            this.pictureCode.Image = ((System.Drawing.Image)(resources.GetObject("pictureCode.Image")));
-            this.pictureCode.Location = new System.Drawing.Point(880, 130);
+            this.pictureCode.Location = new System.Drawing.Point(889, 130);
             this.pictureCode.Name = "pictureCode";
-            this.pictureCode.Size = new System.Drawing.Size(299, 151);
+            this.pictureCode.Size = new System.Drawing.Size(327, 141);
             this.pictureCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureCode.TabIndex = 3;
             this.pictureCode.TabStop = false;
@@ -252,6 +242,29 @@
             this.label1.Text = "Прием биоматериала";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Comic Sans MS", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(920, 286);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 24);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "label3";
+            this.label3.Visible = false;
+            // 
+            // button2
+            // 
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Comic Sans MS", 11.2F);
+            this.button2.Location = new System.Drawing.Point(611, 184);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(177, 39);
+            this.button2.TabIndex = 18;
+            this.button2.Text = "Сохранить";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // PriemBiomateriala
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -285,8 +298,9 @@
         private System.Windows.Forms.ComboBox comboBoxFIO;
         private System.Windows.Forms.Label labelUsluga;
         private System.Windows.Forms.Button buttonSformirovatOrder;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ComboBox comboBoxUsluga;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button2;
     }
 }

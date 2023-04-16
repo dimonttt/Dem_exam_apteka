@@ -15,11 +15,11 @@
         </EntityType>
         <EntityType Name="blood">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="id_blood" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id_blood" Type="int" Nullable="false" />
           <Property Name="patient" Type="int" />
-          <Property Name="barcode" Type="varchar" MaxLength="50" />
+          <Property Name="barcode" Type="int" />
           <Property Name="date" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="blood_services">
@@ -31,7 +31,6 @@
           <Property Name="service" Type="int" />
           <Property Name="result" Type="varchar" MaxLength="50" />
           <Property Name="finished" Type="varchar" MaxLength="50" />
-          <Property Name="accepted" Type="varchar" MaxLength="50" />
           <Property Name="status" Type="varchar" MaxLength="50" />
           <Property Name="analyzer" Type="varchar" MaxLength="50" />
           <Property Name="user" Type="int" />
@@ -56,6 +55,7 @@
           <Property Name="Services" Type="nvarchar" MaxLength="50" />
           <Property Name="Accounts" Type="nvarchar" MaxLength="50" />
           <Property Name="Post" Type="int" />
+          <Property Name="id_user" Type="int" />
         </EntityType>
         <EntityType Name="InsuranceCompanies">
           <Key>
@@ -83,11 +83,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="DateOfCreation" Type="date" />
-          <Property Name="OrderStatus" Type="nchar" MaxLength="50" />
-          <Property Name="ServiceStatusInTheOrder" Type="nchar" MaxLength="50" />
-          <Property Name="OrderOmpletionTime" Type="nchar" MaxLength="50" />
-          <Property Name="Users" Type="int" />
+          <Property Name="patient" Type="nchar" MaxLength="50" />
+          <Property Name="services" Type="nchar" MaxLength="50" />
+          <Property Name="cost" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="OrderServices">
           <Key>
@@ -97,11 +95,22 @@
           <Property Name="Service" Type="int" />
           <Property Name="Order" Type="int" />
         </EntityType>
+        <EntityType Name="patient_new">
+          <Key>
+            <PropertyRef Name="ID_patients_new" />
+          </Key>
+          <Property Name="ID_patients_new" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="50" />
+          <Property Name="surname" Type="nchar" MaxLength="50" />
+          <Property Name="email" Type="nchar" MaxLength="50" />
+          <Property Name="phone" Type="nchar" MaxLength="50" />
+          <Property Name="birthdate_timestamp" Type="nchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Patients">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="ID_Patients" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Patients" Type="int" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="surname" Type="varchar" MaxLength="50" />
           <Property Name="email" Type="varchar" MaxLength="50" />
@@ -116,7 +125,6 @@
           <Property Name="insurance_name" Type="varchar" MaxLength="50" />
           <Property Name="insurance_address" Type="varchar" MaxLength="50" />
           <Property Name="insurance_inn" Type="varchar" MaxLength="50" />
-          <Property Name="ipadress" Type="varchar" MaxLength="50" />
           <Property Name="insurance_p c" Type="varchar" MaxLength="50" />
           <Property Name="insurance_bik" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -164,26 +172,13 @@
           <Property Name="lastenter" Type="varchar" MaxLength="50" />
           <Property Name="services" Type="varchar" MaxLength="50" />
           <Property Name="type" Type="varchar" MaxLength="50" />
-          <Property Name="Position" Type="int" />
         </EntityType>
-        <Association Name="FK_blood_Patients">
-          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
-          <End Role="blood" Type="Self.blood" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Patients">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="blood">
-              <PropertyRef Name="patient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_blood_services_blood">
           <End Role="blood" Type="Self.blood" Multiplicity="0..1" />
           <End Role="blood_services" Type="Self.blood_services" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="blood">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="id_blood" />
             </Principal>
             <Dependent Role="blood_services">
               <PropertyRef Name="blood" />
@@ -199,18 +194,6 @@
             </Principal>
             <Dependent Role="blood_services">
               <PropertyRef Name="service" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_blood_services_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-          <End Role="blood_services" Type="Self.blood_services" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="blood_services">
-              <PropertyRef Name="user" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -250,6 +233,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Employees_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderServices_DoneServices">
           <End Role="DoneServices" Type="Self.DoneServices" Multiplicity="0..1" />
           <End Role="OrderServices" Type="Self.OrderServices" Multiplicity="*" />
@@ -286,30 +281,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Users_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="Position" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Users_Patients">
-          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Patients">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="Position" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="Хранилище chemist_shopModelContainer">
           <EntitySet Name="Analyzers" EntityType="Self.Analyzers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="blood" EntityType="Self.blood" Schema="dbo" store:Type="Tables" />
@@ -320,26 +291,19 @@
           <EntitySet Name="Laboratory services" EntityType="Self.Laboratory services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderServices" EntityType="Self.OrderServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patient_new" EntityType="Self.patient_new" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Patients" EntityType="Self.Patients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="services" EntityType="Self.services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeOfInsurancePolicy" EntityType="Self.TypeOfInsurancePolicy" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_blood_Patients" Association="Self.FK_blood_Patients">
-            <End Role="Patients" EntitySet="Patients" />
-            <End Role="blood" EntitySet="blood" />
-          </AssociationSet>
           <AssociationSet Name="FK_blood_services_blood" Association="Self.FK_blood_services_blood">
             <End Role="blood" EntitySet="blood" />
             <End Role="blood_services" EntitySet="blood_services" />
           </AssociationSet>
           <AssociationSet Name="FK_blood_services_services" Association="Self.FK_blood_services_services">
             <End Role="services" EntitySet="services" />
-            <End Role="blood_services" EntitySet="blood_services" />
-          </AssociationSet>
-          <AssociationSet Name="FK_blood_services_Users" Association="Self.FK_blood_services_Users">
-            <End Role="Users" EntitySet="Users" />
             <End Role="blood_services" EntitySet="blood_services" />
           </AssociationSet>
           <AssociationSet Name="FK_DoneServices_Analyzers" Association="Self.FK_DoneServices_Analyzers">
@@ -354,6 +318,10 @@
             <End Role="Post" EntitySet="Post" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
+          <AssociationSet Name="FK_Employees_Users" Association="Self.FK_Employees_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderServices_DoneServices" Association="Self.FK_OrderServices_DoneServices">
             <End Role="DoneServices" EntitySet="DoneServices" />
             <End Role="OrderServices" EntitySet="OrderServices" />
@@ -365,14 +333,6 @@
           <AssociationSet Name="FK_OrderServices_Order" Association="Self.FK_OrderServices_Order">
             <End Role="Order" EntitySet="Order" />
             <End Role="OrderServices" EntitySet="OrderServices" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_Employees" Association="Self.FK_Users_Employees">
-            <End Role="Employees" EntitySet="Employees" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_Patients" Association="Self.FK_Users_Patients">
-            <End Role="Patients" EntitySet="Patients" />
-            <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -391,13 +351,12 @@
         </EntityType>
         <EntityType Name="blood">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="id_blood" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_blood" Type="Int32" Nullable="false" />
           <Property Name="patient" Type="Int32" />
-          <Property Name="barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="barcode" Type="Int32" />
           <Property Name="date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Patients" Relationship="Self.FK_blood_Patients" FromRole="blood" ToRole="Patients" />
           <NavigationProperty Name="blood_services" Relationship="Self.FK_blood_services_blood" FromRole="blood" ToRole="blood_services" />
         </EntityType>
         <EntityType Name="blood_services">
@@ -409,13 +368,11 @@
           <Property Name="service" Type="Int32" />
           <Property Name="result" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="finished" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="accepted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="analyzer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="user" Type="Int32" />
           <NavigationProperty Name="blood1" Relationship="Self.FK_blood_services_blood" FromRole="blood_services" ToRole="blood" />
           <NavigationProperty Name="services" Relationship="Self.FK_blood_services_services" FromRole="blood_services" ToRole="services" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_blood_services_Users" FromRole="blood_services" ToRole="Users" />
         </EntityType>
         <EntityType Name="DoneServices">
           <Key>
@@ -440,8 +397,9 @@
           <Property Name="Services" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Accounts" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Post" Type="Int32" />
+          <Property Name="id_user" Type="Int32" />
           <NavigationProperty Name="Post1" Relationship="Self.FK_Employees_Post" FromRole="Employees" ToRole="Post" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Employees" FromRole="Employees" ToRole="Users" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Employees_Users" FromRole="Employees" ToRole="Users" />
         </EntityType>
         <EntityType Name="InsuranceCompanies">
           <Key>
@@ -470,11 +428,9 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="DateOfCreation" Type="DateTime" Precision="0" />
-          <Property Name="OrderStatus" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="ServiceStatusInTheOrder" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="OrderOmpletionTime" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="Users" Type="Int32" />
+          <Property Name="patient" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="services" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="cost" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="OrderServices" Relationship="Self.FK_OrderServices_Order" FromRole="Order" ToRole="OrderServices" />
         </EntityType>
         <EntityType Name="OrderServices">
@@ -488,11 +444,22 @@
           <NavigationProperty Name="Laboratory_services" Relationship="Self.FK_OrderServices_Laboratory_services" FromRole="OrderServices" ToRole="Laboratory_services" />
           <NavigationProperty Name="Order1" Relationship="Self.FK_OrderServices_Order" FromRole="OrderServices" ToRole="Order" />
         </EntityType>
+        <EntityType Name="patient_new">
+          <Key>
+            <PropertyRef Name="ID_patients_new" />
+          </Key>
+          <Property Name="ID_patients_new" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="birthdate_timestamp" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
         <EntityType Name="Patients">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="ID_Patients" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Patients" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -507,11 +474,8 @@
           <Property Name="insurance_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="insurance_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="insurance_inn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ipadress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="insurance_p_c" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="insurance_bik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="blood" Relationship="Self.FK_blood_Patients" FromRole="Patients" ToRole="blood" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Patients" FromRole="Patients" ToRole="Users" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
@@ -559,11 +523,8 @@
           <Property Name="lastenter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="services" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Position" Type="Int32" />
-          <NavigationProperty Name="blood_services" Relationship="Self.FK_blood_services_Users" FromRole="Users" ToRole="blood_services" />
           <NavigationProperty Name="DoneServices" Relationship="Self.FK_DoneServices_Users" FromRole="Users" ToRole="DoneServices" />
-          <NavigationProperty Name="Employees" Relationship="Self.FK_Users_Employees" FromRole="Users" ToRole="Employees" />
-          <NavigationProperty Name="Patients" Relationship="Self.FK_Users_Patients" FromRole="Users" ToRole="Patients" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Users" FromRole="Users" ToRole="Employees" />
         </EntityType>
         <Association Name="FK_DoneServices_Analyzers">
           <End Role="Analyzers" Type="Self.Analyzers" Multiplicity="0..1" />
@@ -577,24 +538,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_blood_Patients">
-          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
-          <End Role="blood" Type="Self.blood" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Patients">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="blood">
-              <PropertyRef Name="patient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_blood_services_blood">
           <End Role="blood" Type="Self.blood" Multiplicity="0..1" />
           <End Role="blood_services" Type="Self.blood_services" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="blood">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="id_blood" />
             </Principal>
             <Dependent Role="blood_services">
               <PropertyRef Name="blood" />
@@ -610,18 +559,6 @@
             </Principal>
             <Dependent Role="blood_services">
               <PropertyRef Name="service" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_blood_services_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
-          <End Role="blood_services" Type="Self.blood_services" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="blood_services">
-              <PropertyRef Name="user" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -661,15 +598,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Users_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+        <Association Name="FK_Employees_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Employees">
+            <Principal Role="Users">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="Position" />
+            <Dependent Role="Employees">
+              <PropertyRef Name="id_user" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -697,19 +634,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Users_Patients">
-          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Patients">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="Position" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="chemist_shopEntities4" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="chemist_shopEntities8" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Analyzers" EntityType="Self.Analyzers" />
           <EntitySet Name="blood" EntityType="Self.blood" />
           <EntitySet Name="blood_services" EntityType="Self.blood_services" />
@@ -719,6 +644,7 @@
           <EntitySet Name="Laboratory_services" EntityType="Self.Laboratory_services" />
           <EntitySet Name="Order" EntityType="Self.Order" />
           <EntitySet Name="OrderServices" EntityType="Self.OrderServices" />
+          <EntitySet Name="patient_new" EntityType="Self.patient_new" />
           <EntitySet Name="Patients" EntityType="Self.Patients" />
           <EntitySet Name="Post" EntityType="Self.Post" />
           <EntitySet Name="services" EntityType="Self.services" />
@@ -729,20 +655,12 @@
             <End Role="Analyzers" EntitySet="Analyzers" />
             <End Role="DoneServices" EntitySet="DoneServices" />
           </AssociationSet>
-          <AssociationSet Name="FK_blood_Patients" Association="Self.FK_blood_Patients">
-            <End Role="Patients" EntitySet="Patients" />
-            <End Role="blood" EntitySet="blood" />
-          </AssociationSet>
           <AssociationSet Name="FK_blood_services_blood" Association="Self.FK_blood_services_blood">
             <End Role="blood" EntitySet="blood" />
             <End Role="blood_services" EntitySet="blood_services" />
           </AssociationSet>
           <AssociationSet Name="FK_blood_services_services" Association="Self.FK_blood_services_services">
             <End Role="services" EntitySet="services" />
-            <End Role="blood_services" EntitySet="blood_services" />
-          </AssociationSet>
-          <AssociationSet Name="FK_blood_services_Users" Association="Self.FK_blood_services_Users">
-            <End Role="Users" EntitySet="Users" />
             <End Role="blood_services" EntitySet="blood_services" />
           </AssociationSet>
           <AssociationSet Name="FK_DoneServices_Users" Association="Self.FK_DoneServices_Users">
@@ -757,9 +675,9 @@
             <End Role="Post" EntitySet="Post" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK_Users_Employees" Association="Self.FK_Users_Employees">
-            <End Role="Employees" EntitySet="Employees" />
+          <AssociationSet Name="FK_Employees_Users" Association="Self.FK_Employees_Users">
             <End Role="Users" EntitySet="Users" />
+            <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderServices_Laboratory_services" Association="Self.FK_OrderServices_Laboratory_services">
             <End Role="Laboratory_services" EntitySet="Laboratory_services" />
@@ -769,17 +687,13 @@
             <End Role="Order" EntitySet="Order" />
             <End Role="OrderServices" EntitySet="OrderServices" />
           </AssociationSet>
-          <AssociationSet Name="FK_Users_Patients" Association="Self.FK_Users_Patients">
-            <End Role="Patients" EntitySet="Patients" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище chemist_shopModelContainer" CdmEntityContainer="chemist_shopEntities4">
+        <EntityContainerMapping StorageEntityContainer="Хранилище chemist_shopModelContainer" CdmEntityContainer="chemist_shopEntities8">
           <EntitySetMapping Name="Analyzers">
             <EntityTypeMapping TypeName="chemist_shopModel.Analyzers">
               <MappingFragment StoreEntitySet="Analyzers">
@@ -792,7 +706,7 @@
           <EntitySetMapping Name="blood">
             <EntityTypeMapping TypeName="chemist_shopModel.blood">
               <MappingFragment StoreEntitySet="blood">
-                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_blood" ColumnName="id_blood" />
                 <ScalarProperty Name="patient" ColumnName="patient" />
                 <ScalarProperty Name="barcode" ColumnName="barcode" />
                 <ScalarProperty Name="date" ColumnName="date" />
@@ -807,7 +721,6 @@
                 <ScalarProperty Name="service" ColumnName="service" />
                 <ScalarProperty Name="result" ColumnName="result" />
                 <ScalarProperty Name="finished" ColumnName="finished" />
-                <ScalarProperty Name="accepted" ColumnName="accepted" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="analyzer" ColumnName="analyzer" />
                 <ScalarProperty Name="user" ColumnName="user" />
@@ -834,6 +747,7 @@
                 <ScalarProperty Name="Services" ColumnName="Services" />
                 <ScalarProperty Name="Accounts" ColumnName="Accounts" />
                 <ScalarProperty Name="Post" ColumnName="Post" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -864,11 +778,9 @@
             <EntityTypeMapping TypeName="chemist_shopModel.Order">
               <MappingFragment StoreEntitySet="Order">
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="DateOfCreation" ColumnName="DateOfCreation" />
-                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
-                <ScalarProperty Name="ServiceStatusInTheOrder" ColumnName="ServiceStatusInTheOrder" />
-                <ScalarProperty Name="OrderOmpletionTime" ColumnName="OrderOmpletionTime" />
-                <ScalarProperty Name="Users" ColumnName="Users" />
+                <ScalarProperty Name="patient" ColumnName="patient" />
+                <ScalarProperty Name="services" ColumnName="services" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -881,10 +793,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="patient_new">
+            <EntityTypeMapping TypeName="chemist_shopModel.patient_new">
+              <MappingFragment StoreEntitySet="patient_new">
+                <ScalarProperty Name="ID_patients_new" ColumnName="ID_patients_new" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="birthdate_timestamp" ColumnName="birthdate_timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Patients">
             <EntityTypeMapping TypeName="chemist_shopModel.Patients">
               <MappingFragment StoreEntitySet="Patients">
-                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ID_Patients" ColumnName="ID_Patients" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="surname" ColumnName="surname" />
                 <ScalarProperty Name="email" ColumnName="email" />
@@ -899,7 +823,6 @@
                 <ScalarProperty Name="insurance_name" ColumnName="insurance_name" />
                 <ScalarProperty Name="insurance_address" ColumnName="insurance_address" />
                 <ScalarProperty Name="insurance_inn" ColumnName="insurance_inn" />
-                <ScalarProperty Name="ipadress" ColumnName="ipadress" />
                 <ScalarProperty Name="insurance_p_c" ColumnName="insurance_p c" />
                 <ScalarProperty Name="insurance_bik" ColumnName="insurance_bik" />
               </MappingFragment>
@@ -952,7 +875,6 @@
                 <ScalarProperty Name="lastenter" ColumnName="lastenter" />
                 <ScalarProperty Name="services" ColumnName="services" />
                 <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

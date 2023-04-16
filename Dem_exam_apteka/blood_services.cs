@@ -19,13 +19,11 @@ namespace Dem_exam_apteka
         public Nullable<int> service { get; set; }
         public string result { get; set; }
         public string finished { get; set; }
-        public string accepted { get; set; }
         public string status { get; set; }
         public string analyzer { get; set; }
         public Nullable<int> user { get; set; }
     
         public virtual blood blood1 { get; set; }
         public virtual services services { get; set; }
-        public virtual Users Users { get; set; }
     }
 }

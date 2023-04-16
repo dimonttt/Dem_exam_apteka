@@ -14,14 +14,7 @@ namespace Dem_exam_apteka
     
     public partial class Patients
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Patients()
-        {
-            this.blood = new HashSet<blood>();
-            this.Users = new HashSet<Users>();
-        }
-    
-        public int id { get; set; }
+        public int ID_Patients { get; set; }
         public string name { get; set; }
         public string surname { get; set; }
         public string email { get; set; }
@@ -36,13 +29,7 @@ namespace Dem_exam_apteka
         public string insurance_name { get; set; }
         public string insurance_address { get; set; }
         public string insurance_inn { get; set; }
-        public string ipadress { get; set; }
         public string insurance_p_c { get; set; }
         public string insurance_bik { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<blood> blood { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Users> Users { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace Dem_exam_apteka
 {
     internal static class Program
     {
-        public static chemist_shopEntities4 wftDb = new chemist_shopEntities4();
+        public static chemist_shopEntities8 wftDb = new chemist_shopEntities8();
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
@@ -17,8 +17,8 @@ namespace Dem_exam_apteka
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new LoginForm());
-            Application.Run(new Laborant());
+            Application.Run(new OrderCreate());
+            //Application.Run(new Laborant());
         }
     }
 }

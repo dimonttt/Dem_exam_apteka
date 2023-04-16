@@ -14,20 +14,14 @@ namespace Dem_exam_apteka
     
     public partial class Employees
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Employees()
-        {
-            this.Users = new HashSet<Users>();
-        }
-    
         public int ID { get; set; }
         public Nullable<System.DateTime> LastSeans { get; set; }
         public string Services { get; set; }
         public string Accounts { get; set; }
         public Nullable<int> Post { get; set; }
+        public Nullable<int> id_user { get; set; }
     
         public virtual Post Post1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Users> Users { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

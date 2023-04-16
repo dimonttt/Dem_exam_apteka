@@ -13,10 +13,10 @@ namespace Dem_exam_apteka
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class chemist_shopEntities4 : DbContext
+    public partial class chemist_shopEntities8 : DbContext
     {
-        public chemist_shopEntities4()
-            : base("name=chemist_shopEntities4")
+        public chemist_shopEntities8()
+            : base("name=chemist_shopEntities8")
         {
         }
     
@@ -34,6 +34,7 @@ namespace Dem_exam_apteka
         public virtual DbSet<Laboratory_services> Laboratory_services { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderServices> OrderServices { get; set; }
+        public virtual DbSet<patient_new> patient_new { get; set; }
         public virtual DbSet<Patients> Patients { get; set; }
         public virtual DbSet<Post> Post { get; set; }
         public virtual DbSet<services> services { get; set; }
